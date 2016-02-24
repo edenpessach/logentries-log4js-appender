@@ -31,7 +31,6 @@ var passThrough = layouts.messagePassThroughLayout;
 
 exports.configure = function( config ){
     var options = config.options;
-    console.log('configuring', config);
     if ( !options.token ){
         throw new Error('logentries appender requires token');
     }
