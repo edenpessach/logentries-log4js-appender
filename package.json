@@ -1,0 +1,10 @@
+{
+  "name": "logentries-log4js-appender",
+  "version": "0.0.0",
+  "devDependencies": {
+    "log4js": "^0.6.31"
+  },
+  "dependencies": {
+    "le_node": "^1.2.0"
+  }
+}
