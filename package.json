@@ -4,6 +4,7 @@
   "devDependencies": {
     "log4js": "^0.6.31"
   },
+  "main" : "src/logentries.js",
   "dependencies": {
     "le_node": "^1.2.0"
   }
