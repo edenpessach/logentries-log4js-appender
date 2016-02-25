@@ -2,7 +2,19 @@
   "name": "logentries-log4js-appender",
   "version": "0.0.2",
   "devDependencies": {
-    "log4js": "^0.6.31"
+    "log4js": "^0.6.31",
+    "mocha": "^2.4.5",
+    "xo": "^0.12.1"
+  },
+  "scripts": {
+    "test": "npm run lint && ./node_modules/mocha/bin/mocha",
+
+    "lint": "./node_modules/xo/cli.js"
+  },
+  "xo" : {
+     "space" : 4,
+    "globals" : [ "describe", "it", "beforeEach" ]
+
   },
   "main": "src/logentries.js",
   "dependencies": {

@@ -27,55 +27,63 @@ var passThrough = layouts.messagePassThroughLayout;
  *     TRACE    traces are logged
  *     ALL
  **/
+/**
+ *
+ * @param config
+ * @returns {*}
+ */
 
-
-exports.configure = function( config ){
+exports.configure = (config) => {
     var options = config.options;
-    if ( !options.token ){
-        throw new Error('logentries appender requires token');
+    if (typeof (options.token) === 'string') {
+        logger = new Logger({token: options.token});
+    } else {
+        console.error('ERROR: logentries appender expected token but did not get one'); // todo: how to properly propagate? throwing exception does not work nicely.
+        return null;
     }
-    logger = new Logger({token: options.token});
 
     var layout;
     if (config.layout) {
         layout = layouts.layout(config.layout.type, config.layout);
-    }else{
+    } else {
         layout = passThrough;
     }
 
-    return exports.appender(  config, layout );
+    return exports.appender(config, layout);
 };
 
-exports.appender = function( config, layout ){
-    return function( event ){
-
+exports.appender = (config, layout) => {
+    return function (event) {
         var msg = layout(event);
-        if ( event.level.levelStr === 'FATAL' ){
+
+        if (logger === null) {
+            return;
+        }
+
+        if (event.level.levelStr === 'FATAL') {
             logger.crit(msg);
         }
 
-        if ( event.level.levelStr === 'ERROR' ){
+        if (event.level.levelStr === 'ERROR') {
             logger.err(msg);
         }
 
-        if ( event.level.levelStr === 'WARN' ){
+        if (event.level.levelStr === 'WARN') {
             logger.warning(msg);
         }
 
-        if ( event.level.levelStr === 'INFO' ){
+        if (event.level.levelStr === 'INFO') {
             logger.info(msg);
         }
 
-        if ( event.level.levelStr === 'DEBUG' ){
+        if (event.level.levelStr === 'DEBUG') {
             logger.debug(msg);
         }
 
-        if ( event.level.levelStr === 'TRACE' ){
+        if (event.level.levelStr === 'TRACE') {
             logger.debug(msg);
         }
-
-
-    }
+    };
 };
 
 exports.name = 'logentries';
