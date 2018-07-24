@@ -1,40 +1,18 @@
 'use strict';
-
-var layouts = require('log4js').layouts;
 var Logger = require('le_node');
+var levels = require('log4js').levels;
 var logger = null;
-var passThrough = layouts.messagePassThroughLayout;
 
-/**
- *
- *      debug
- *      info
- *      notice
- *      warning
- *      err
- *      crit
- *      alert
- *      emerg
- **/
-
-/**
- *     OFF      nothing is logged
- *     FATAL    fatal errors are logged
- *     ERROR    errors are logged
- *     WARN     warnings are logged
- *     INFO     infos are logged
- *     DEBUG    debug infos are logged
- *     TRACE    traces are logged
- *     ALL
- **/
 /**
  *
  * @param config
+ * @param layouts
  * @returns {*}
  */
-
-exports.configure = (config) => {
+exports.configure = (config, layouts) => {
     var options = config.options;
+    var passThrough = layouts.messagePassThroughLayout;
+
     if (typeof (options.token) === 'string') {
         logger = new Logger({token: options.token});
     } else {
@@ -60,28 +38,28 @@ exports.appender = (config, layout) => {
             return;
         }
 
-        if (event.level.levelStr === 'FATAL') {
-            logger.crit(msg);
+        if (event.level === levels.FATAL) {
+            logger.fatal(msg);
         }
 
-        if (event.level.levelStr === 'ERROR') {
-            logger.err(msg);
+        if (event.level === levels.ERROR) {
+            logger.error(msg);
         }
 
-        if (event.level.levelStr === 'WARN') {
-            logger.warning(msg);
+        if (event.level === levels.WARN) {
+            logger.warn(msg);
         }
 
-        if (event.level.levelStr === 'INFO') {
+        if (event.level === levels.INFO) {
             logger.info(msg);
         }
 
-        if (event.level.levelStr === 'DEBUG') {
+        if (event.level === levels.DEBUG) {
             logger.debug(msg);
         }
 
-        if (event.level.levelStr === 'TRACE') {
-            logger.debug(msg);
+        if (event.level === levels.TRACE) {
+            logger.trace(msg);
         }
     };
 };
