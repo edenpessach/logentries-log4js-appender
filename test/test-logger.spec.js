@@ -15,6 +15,12 @@ describe('logentries appender', () => {
         log4js.configure({
             appenders: {
                 logentries: {type: 'logentries', options: {token: process.env.LOGENTRIES_TOKEN}}
+            },
+            categories: {
+                hello: {
+                    appenders: ['logentries'],
+                    level: "info"
+                }
             }
         });
 
