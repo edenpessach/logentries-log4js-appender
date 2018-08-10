@@ -2,7 +2,7 @@
   "name": "logentries-log4js-appender",
   "version": "0.1.0",
   "devDependencies": {
-    "log4js": "2.11.0",
+    "log4js": "3.0.4",
     "mocha": "^2.4.5",
     "xo": "^0.12.1"
   },
