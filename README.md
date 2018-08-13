@@ -7,7 +7,7 @@ var log4js = require("log4js");
 log4js.configure({
             appenders: {
                  logentries: {
-                    type: "logentries", 
+                    type: "logentries-log4js-appender", 
                     options: {
                         token: process.env.LOGENTRIES_TOKEN
                     }
