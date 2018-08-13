@@ -39,15 +39,15 @@ exports.appender = (config, layout) => {
         }
 
         if (event.level === levels.FATAL) {
-            logger.fatal(msg);
+            logger.emerg(msg);
         }
 
         if (event.level === levels.ERROR) {
-            logger.error(msg);
+            logger.err(msg);
         }
 
         if (event.level === levels.WARN) {
-            logger.warn(msg);
+            logger.warning(msg);
         }
 
         if (event.level === levels.INFO) {
@@ -59,7 +59,7 @@ exports.appender = (config, layout) => {
         }
 
         if (event.level === levels.TRACE) {
-            logger.trace(msg);
+            logger.notice(msg);
         }
     };
 };
