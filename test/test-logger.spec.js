@@ -13,9 +13,15 @@ describe('logentries appender', () => {
 
     it('should send messages to logentries', () => {
         log4js.configure({
-            appenders: [
-                {type: 'logentries', options: {token: process.env.LOGENTRIES_TOKEN}}
-            ]
+            appenders: {
+                logentries: {type: 'logentries', options: {token: process.env.LOGENTRIES_TOKEN}}
+            },
+            categories: {
+                hello: {
+                    appenders: ['logentries'],
+                    level: "info"
+                }
+            }
         });
 
         var logger = log4js.getLogger('hello');
